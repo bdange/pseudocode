@@ -1,0 +1,41 @@
+Short Answer
+1- Why do programmers use pseudocode?
+
+Programmers use pseudocode in order to develop algorithms. 
+It's a way to plan and visualise your future algorithm by writing statements explaining the different steps and actions of your algorithm. 
+
+2- If you run pseudocode on your computer what would happen?
+
+Basically nothing would happen as it made to be read by human, not a machine. 
+
+
+Programming Assignment
+
+1- Create a function that takes two numbers and prints out the greater number.
+
+INPUT number a
+INPUT number b
+IF number a is greater than number b THEN
+	PRINT "Number a is greater than number b"
+ELSE
+	PRINT "Number b is greater than number a"
+END IF
+
+
+2- Create a function that prints out the numbers from 1 to 100.
+
+INITI total to 1
+INPUT a number = 1
+WHILE the total is not equal to 100
+	ADD a number to total
+	INPUT total
+END WHILE
+RETURN total
+
+
+3- Create a function that searches for a specific entry in a phonebook.
+
+INIT an array of items corresponding to phone book
+WHILE the item is not "Arnold" keep searching
+	return "Arnold"
+ENDWHILE
