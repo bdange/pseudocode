@@ -1,0 +1,98 @@
+1. What is the main difference between a stack and a queue?
+
+Basically a stack is a LIFO type while a queue is a FIFO type.
+
+
+2. What are the similarities between stacks and queues?
+
+Stacks and queues are both non-primitive linear data structures used for storing data elements. Insertion and deletion can both be performed on either stacks or queues. 
+
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+I would use a stack as it concerns as undo concerns the last action and redo concerns the last action too which is undo. 
+
+Programming Questions
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+function reverseString(str){
+
+  const arr = [...str]
+  let reverse= "";
+
+  while(arr.length){
+     reverse = reverse + arr.pop()
+  }
+
+  return reverse
+}
+console.log(reverseString('Bloc!'));
+
+
+//To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be removed and returned.
+
+1. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+class Queue 
+{ 
+    constructor() 
+    { 
+        this.items = []; 
+    } 
+                  
+enqueue(element) 
+{     
+    this.items.push(element); 
+} 
+  
+dequeue() 
+{  
+    if(this.isEmpty()) 
+        return "Underflow"; 
+    return this.items.shift(); 
+} 
+
+front() 
+{ 
+    // returns the Front element of  
+    // the queue without removing it.
+    if(this.isEmpty()) 
+        return "No elements in Queue"; 
+    return this.items[0]; 
+} 
+  
+isEmpty() 
+{ 
+    // return true if the queue is empty. 
+    return this.items.length == 0; 
+} 
+printQueue() 
+{ 
+    var str = ""; 
+    for(var i = 0; i < this.items.length; i++) 
+        str += this.items[i] +" "; 
+    return str; 
+} 
+} 
+
+var queue = new Queue(); 
+              
+console.log(queue.dequeue());   
+console.log(queue.isEmpty()); 
+queue.enqueue(10); 
+queue.enqueue(20); 
+queue.enqueue(30); 
+queue.enqueue(40); 
+queue.enqueue(50); 
+queue.enqueue(60); 
+
+console.log(queue.front()); 
+console.log(queue.dequeue()); 
+console.log(queue.printQueue());
+console.log(queue.front());
+console.log(queue.dequeue());
+console.log(queue.printQueue()); 
+
