@@ -1,0 +1,85 @@
+1. A line of people at an amusement park ride.
+
+The line is composed of members, represented as strings.
+There is a front to the line, as well as a back.
+When someone enters the line, place them at the end.
+People may leave the line whenever they see fit, and those behind them take their place.
+Given the above real-world information, use an array data structure to code the following solution.
+
+a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var array = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+//b) Insert a new person, "Mary" at the end of the line. 
+
+array.push("Mary");
+console.log(array);
+
+//c) Find a person in line named "Josh." 
+function findJosh(name) {
+  return name == "Josh";
+}
+console.log(array.findIndex(findJosh));
+
+// d) Find a person in line named "Emily." 
+//What should your function return if it does not find the item in the array?
+
+var found = array.find(function(name){
+  return name === "Emily";
+})
+console.log(found); // get 'undefined'
+
+// e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? 
+// How would you code this so Melissa appears before Ava?
+
+array.splice(1, 0, "Melissa");
+console.log(array);
+
+// f) If Patrick wants to leave the line, how would you delete him from the array?
+array.splice(array.indexOf("Patrick"), 1);
+console.log(array);
+
+
+2. Provide another real-world example that you can model using a data structure.
+
+Let's say that we have an online merchant site where I am going to buy food items. 
+The first step to do is to: 
+INIT food_items to an empty array. 
+
+So far I have the following chosen items in my basket: ["chocolate", "lettuce", "carrots"].
+The steps to follow are:
+SET "chocolate"[FIRST INDEX] to me
+SET "lettuce"[SECOND INDEX] to me
+SET "carrots"[THIRD INDEX] to me
+
+I now realise that if I'd like to make a meal with that I will need to add more items, to do a salad for instance. 
+First of all, I don't think chocolate will be needed whether it is for my salad or for my diet. So I remove it from my list. 
+Right now my list looks as follows: ["lettuce", "carrots"].
+The step to follow is: 
+REMOVE "chocolate"[FIRST INDEX] from me.
+
+It's now time to add more items. Let's add some bacon, cucumber, goat cheese, honey, and bread. 
+Now our item array looks like that: ["lettuce', "carrots", "bacon", "cucumber", "goat cheese", "honey", "bread"].
+The steps to follow are:
+SET "bacon"[FOURTH INDEX] to me
+SET "cucumber"[FIFTH INDEX] to me
+SET "goat cheese"[SIXTH INDEX] to me
+SET "bread"[SEVENTH INDEX] to me
+END food_items
+
+
+3. How would your data structure allow developers to access and manipulate the data?
+
+While checking my list, my friend Kyle reminded me he's vegetarian and doesn't eat meat. So he decided to remove this item himself from his account on my list. I have also allowed him to confirm the order once he's done. 
+Now our item array looks like that: ["lettuce', "carrots", "cucumber", "goat cheese", "honey", "bread"].
+The step to follow would be: 
+ACCESS Ben's food_items
+OPEN food_items 
+REMOVE "bacon"[FOURTH INDEX] from me
+CONFIRM food_items
+END food_items
+
+
+
+
+
