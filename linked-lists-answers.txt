@@ -1,0 +1,21 @@
+Exercises
+
+1. What are some pros and cons of using linked lists instead of arrays?
+
+The advantage of using linked list is that you optimise the memory of your processor by not leaving any empty space which could be allocated to other files. This is happening because the system allocates the first available node to fill the need. 
+However, this can cause some inefficiency as while looking for let's say a certain file, the system will have to go through each node in order to find it. Finally, extra memory space for a link is necessary. 
+
+
+2. Come up with a real world example of a linked list.
+
+A phonebook could be an example as the numbers in it are not following the alphabetical order established in the book. 
+
+
+Programming Questions
+
+The way I use to solve the question is to usually try to visualise how the code reacts based on my knowledge and experience. Then I'll try solving the issue myself by modifying the code and experience. Finally I'll be looking at extra resources online to see what's missing. 
+
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+When looking at this pseudocode, you quickly realise that you first need to set a class in order to host the function. 
