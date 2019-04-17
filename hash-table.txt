@@ -1,0 +1,226 @@
+1- What is a hash table?
+
+A hash table is a type of data structure storing each value by linking it to a key, forming a key-value paie. Each key being unique, you can retrieve its value by simply entering its own distinct key. 
+
+
+2- What is a hashing?
+
+Hashing is the conversion of a string to a numerical index. 
+
+
+3- How does a hash table store data? 
+
+An element is converted into an integer by using a hash function. This element can be used as an index to store the original element, which falls into the hash table. 
+The element is stored in the hash table where it can be quickly retrieved using an hashed key. 
+
+
+4- How are hash tables and objects different? 
+
+Hash tables are supposedly holding the same type of datas, while objects can hold different types. 
+
+5- Determine whether you would use a has table or an object to store each of the following pieces of data: 
+
+- A list of pets and their unique names: 
+	In that case I think both can be used as in the case of a hash able they are related by the fact that they are pets. It also seem implied that they are owned by the same person or keeper. 
+However, as they are different type of pets we could also use objects. 
+
+- The name, age, and the birthday of your best friend: 
+	I would use an object as there is only a single person. 
+
+- The name and location of every company in a given city:
+	I would use a hash table as these companies are all related by the same city. 
+
+- All of the books checked out from a library by a particular individual: 
+	In that case, both options seem good too as you can use a hash table related to the individual, especially if there are several books taken, or an object with the individual as the name object can also be taken. 
+
+- The primary and secondary phone numbers for a contact. 
+	An object seems sufficient. 
+
+Programming Questions
+
+1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+var hash = (key, buckets) => {
+  var hashCode = 0; 
+  for (var i = 0; i < key.length; i++){
+    hashCode += key.charCodeAt(i);
+  }
+  return hashCode % buckets; 
+};
+
+let HashTable = function() {
+  
+  let storage = [];
+  let numberOfBuckets = 10;
+  
+  this.print = function() {
+    console.log(storage);
+  }
+  
+  this.add = function(value){
+   
+    let key = value.number; 
+    let index = hash(key, numberOfBuckets);
+    if(storage[index] === undefined){
+      storage[index] = value; 
+    } else {
+      while(storage[index] !== undefined){
+        index++; 
+      }
+      storage[index] = value; 
+    }
+  };
+  
+  this.lookup = function(newKey){
+    let index = hash(newKey, numberOfBuckets);
+    return storage[index];
+  };
+
+};
+
+let hashT = new HashTable();
+
+var benjamin = {
+  name: 'Benjamin',
+  number: '201-330-4883',
+  address: '120 Neilson st.'
+};
+
+var juan = {
+  name: 'Juan',
+  number: '201-964-5261',
+  address: '120 Neilson st.'
+};
+
+var leo = {
+  name: 'Leo',
+  number: '201-591-6905',
+  address: 'Lausanne - Switzerland'
+};
+
+hashT.add(benjamin);
+hashT.add(juan);
+hashT.add(leo);
+
+//hashT.print();
+console.log(hashT.lookup('201-591-6905'));
+
+
+
+///////////////////
+
+2. Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+var hash = (key, buckets) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
+  }
+  return hashCode % buckets;
+};
+
+let HashTable = function() {
+  let storage = [];
+  let numberOfBuckets = 10;
+
+  this.print = function() {
+    console.log(storage);
+  };
+
+  this.add = function(value) {
+    let key = value.name; // find key from name's value
+    let index = hash(key, numberOfBuckets);
+    if (storage[index] === undefined) {
+      storage[index] = value;
+    } else {
+      while (storage[index] !== undefined) {
+        index++;
+      }
+      storage[index] = value;
+    }
+  };
+
+  this.lookup = function(newKey) {
+    let index = hash(newKey, numberOfBuckets);
+    return storage[index];
+  };
+};
+
+let hashT = new HashTable();
+
+var broomstick = {
+  name: "broomstick",
+  number: "23"
+};
+
+var apple = {
+  name: "apple",
+  number: "5"
+};
+
+hashT.add(apple);
+hashT.add(broomstick);
+hashT.print();
+console.log(hashT.lookup("broomstick"));
+
+
+//////////
+3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+var hash = (key, buckets) => {
+  var hashCode = 0; 
+  for (var i = 0; i < key.length; i++){
+    hashCode += key.charCodeAt(i);
+  }
+  return hashCode % buckets; 
+};
+
+let HashTable = function() {
+  
+  let storage = [];
+  let numberOfBuckets = 10;
+  
+  this.print = function() {
+    console.log(storage);
+  }
+  
+  this.add = function(value){
+   
+    let key = (value.publisher + ', ' + value.date); 
+    let index = hash(key, numberOfBuckets);
+    if(storage[index] === undefined){
+      storage[index] = value; 
+    } else {
+      while(storage[index] !== undefined){
+        index++; 
+      }
+      storage[index] = value; 
+    }
+  };
+  
+  this.lookup = function(newKey){
+    let index = hash(newKey, numberOfBuckets);
+    return storage[index];
+  };
+
+};
+
+let hashT = new HashTable();
+
+var wsj = {
+  publisher: 'Wall Publishers',
+  date: '04/17/19',
+  article: 'Shutdown coming'
+}
+
+var penguin = {
+  publisher: 'Penguin',
+  date: '02/20/17',
+  article: 'Learning to code'
+}
+
+hashT.add(wsj);
+hashT.add(penguin);
+hashT.print();
+console.log(hashT.lookup('Wall Publishers, 04/17/19'));
+
