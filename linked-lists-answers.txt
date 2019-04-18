@@ -18,4 +18,115 @@ The way I use to solve the question is to usually try to visualise how the code 
 
 1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
 
-When looking at this pseudocode, you quickly realise that you first need to set a class in order to host the function. 
+The first step should have been to switch the IF step right after the node creation. On that step a tail could also have been created, set to tail. 
+
+FUNCTION push(element)
+
+CREATE node
+	SET node.value TO element
+	SET node.next TO null
+
+IF the head node does not exist
+	THEN SET head to node
+	THEN SET tail to head
+
+ELSE
+	SET current to head
+ 	SET current.next to node
+
+END IF
+
+END FUNCTION 
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+3. Given an unsorted singly linked list, reverse it.
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class SinglyLinkList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  
+  push(value){
+    let newNode = new Node(value);
+    if(!this.head){
+      this.head = newNode;
+      this.tail = this.head; 
+    } else {
+      this.tail.next = newNode; 
+      this.tail = newNode; 
+    }
+    this.length++;
+    return this; 
+  }
+  
+  removeDup() {
+  if(this.head == null || this.head.next == null) return this.head; 
+  let node = this.head; 
+    while (node.next != null) {
+      if (node.value != node.next.value) {
+        node = node.next; 
+      } else {
+        this.length--;
+        node.next = node.next.next;
+      }
+    }
+  }
+  
+   print(){
+    let current = this.head; 
+    let count = 0;
+    let arr = [];
+    while (count < this.length) {
+      arr.push(current.value);
+      current = current.next; 
+      count++;
+    }
+    console.log(arr);
+  }
+  
+  reverse(){
+    if(!this.head) return false; 
+    let node = this.head; 
+    this.head = this.tail; 
+    this.tail = node;
+    
+    let prev = null;
+    let next; 
+    
+    for (let i = 0; i < this.length; i++){
+      next = node.next;
+      node.next = prev; 
+      prev = node;
+      node = next; 
+    }
+    return true; 
+  }
+  
+}
+
+
+let list = new SinglyLinkList();
+console.log(list.head);
+list.push(1);
+console.log(list.head)
+list.push(2);
+console.log(list.head.next);
+list.push(3);
+//console.log(list.head.next.next);
+list.push(4);
+list.push(4);
+list.push(5);
+list.print();
+list.removeDup();
+list.print();
+list.reverse();
+list.print();
