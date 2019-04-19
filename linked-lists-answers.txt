@@ -8,8 +8,7 @@ However, this can cause some inefficiency as while looking for let's say a certa
 
 2. Come up with a real world example of a linked list.
 
-A phonebook could be an example as the numbers in it are not following the alphabetical order established in the book. 
-
+A playlist could be an example as this is a list of elements in list linked to each other by using pointers. 
 
 Programming Questions
 
@@ -28,7 +27,6 @@ CREATE node
 
 IF the head node does not exist
 	THEN SET head to node
-	THEN SET tail to head
 
 ELSE
 	SET current to head
@@ -39,6 +37,84 @@ END IF
 END FUNCTION 
 
 2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class SinglyLinkList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  push(value) {
+    let newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
+
+  removeDup() {
+    if (this.head == null || this.head.next == null) return this.head;
+    let current = this.head;
+    while (current != null) {
+      var prev = current;
+      var nextNode = current.next;
+      while (nextNode !== null) {
+        if (current.value == nextNode.value) {
+          prev.next = nextNode.next;
+          this.length--;
+        } else {
+          prev = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      current = current.next;
+    }
+    return this;
+  }
+
+  print() {
+    let current = this.head;
+    let count = 0;
+    let arr = [];
+    while (count < this.length) {
+      arr.push(current.value);
+      current = current.next;
+      count++;
+    }
+    console.log(arr);
+  }
+}
+
+let list = new SinglyLinkList();
+console.log(list.head);
+list.push(1);
+console.log(list.head);
+list.push(2);
+console.log(list.head.next);
+list.push(3);
+//console.log(list.head.next.next);
+list.push(4);
+list.push(4);
+list.push(5);
+list.push(4);
+list.print();
+list.removeDup();
+list.print();
+
+
 3. Given an unsorted singly linked list, reverse it.
 
 class Node {
@@ -54,70 +130,55 @@ class SinglyLinkList {
     this.tail = null;
     this.length = 0;
   }
-  
-  push(value){
+
+  push(value) {
     let newNode = new Node(value);
-    if(!this.head){
+    if (!this.head) {
       this.head = newNode;
-      this.tail = this.head; 
+      this.tail = this.head;
     } else {
-      this.tail.next = newNode; 
-      this.tail = newNode; 
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
     this.length++;
-    return this; 
+    return this;
   }
-  
-  removeDup() {
-  if(this.head == null || this.head.next == null) return this.head; 
-  let node = this.head; 
-    while (node.next != null) {
-      if (node.value != node.next.value) {
-        node = node.next; 
-      } else {
-        this.length--;
-        node.next = node.next.next;
-      }
-    }
-  }
-  
-   print(){
-    let current = this.head; 
+
+  print() {
+    let current = this.head;
     let count = 0;
     let arr = [];
     while (count < this.length) {
       arr.push(current.value);
-      current = current.next; 
+      current = current.next;
       count++;
     }
     console.log(arr);
   }
-  
-  reverse(){
-    if(!this.head) return false; 
-    let node = this.head; 
-    this.head = this.tail; 
-    this.tail = node;
-    
-    let prev = null;
-    let next; 
-    
-    for (let i = 0; i < this.length; i++){
-      next = node.next;
-      node.next = prev; 
-      prev = node;
-      node = next; 
-    }
-    return true; 
-  }
-  
-}
 
+  reverse() {
+    if (!this.head) return false;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    let prev = null;
+    let next;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return true;
+  }
+}
 
 let list = new SinglyLinkList();
 console.log(list.head);
 list.push(1);
-console.log(list.head)
+console.log(list.head);
 list.push(2);
 console.log(list.head.next);
 list.push(3);
@@ -125,8 +186,7 @@ list.push(3);
 list.push(4);
 list.push(4);
 list.push(5);
-list.print();
-list.removeDup();
+list.push(4);
 list.print();
 list.reverse();
 list.print();
