@@ -38,81 +38,56 @@ END FUNCTION
 
 2. Given an unsorted singly linked list, remove all duplicates from the linked list.
 
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
+function SinglyLinkedListNode(data) {
+  this.data = data;
+  this.next = null;
 }
 
-class SinglyLinkList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
+function SinglyLinkedList() {
+  this.head = null;
+  this.size = 0;
+}
 
-  push(value) {
-    let newNode = new Node(value);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
+SinglyLinkedList.prototype.insert = function(value) {
+  if (this.head === null) {
+    //If first node
+    this.head = new SinglyLinkedListNode(value);
+  } else {
+    var temp = this.head;
+    this.head = new SinglyLinkedListNode(value);
+    this.head.next = temp;
+  }
+  this.size++;
+};
+var sll1 = new SinglyLinkedList();
+sll1.insert(1);
+sll1.insert(2);
+sll1.insert(3);
+sll1.insert(4);
+sll1.insert(3);
+
+//console.log(sll1.head);
+
+function deleteDup(sll1) {
+  var track = {};
+
+  var temp = sll1.head;
+  var prev = null;
+  while (temp) {
+    if (track[temp.data]) {
+      prev.next = temp.next;
+      sll1.size--;
     } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+      track[temp.data] = true;
+      prev = temp;
     }
-    this.length++;
-    return this;
+    temp = temp.next;
   }
-
-  removeDup() {
-    if (this.head == null || this.head.next == null) return this.head;
-    let current = this.head;
-    while (current != null) {
-      var prev = current;
-      var nextNode = current.next;
-      while (nextNode !== null) {
-        if (current.value == nextNode.value) {
-          prev.next = nextNode.next;
-          this.length--;
-        } else {
-          prev = nextNode;
-        }
-        nextNode = nextNode.next;
-      }
-      current = current.next;
-    }
-    return this;
-  }
-
-  print() {
-    let current = this.head;
-    let count = 0;
-    let arr = [];
-    while (count < this.length) {
-      arr.push(current.value);
-      current = current.next;
-      count++;
-    }
-    console.log(arr);
-  }
+  console.log(temp);
 }
-
-let list = new SinglyLinkList();
-console.log(list.head);
-list.push(1);
-console.log(list.head);
-list.push(2);
-console.log(list.head.next);
-list.push(3);
-//console.log(list.head.next.next);
-list.push(4);
-list.push(4);
-list.push(5);
-list.push(4);
-list.print();
-list.removeDup();
-list.print();
+deleteDup(sll1);
+console.log(sll1.head);
+console.log(sll1.head.next);
 
 
 3. Given an unsorted singly linked list, reverse it.
